@@ -3,67 +3,136 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
 
   <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="js/game.js"></script>
 
 </head>
 <body>
 
-<div class="Starting container">
-  <header class="Stage">
-      <div class="row">
-        <h1 class="col-md-12">Quiz Master</h1>
-      </div>
-  </header>
-  <div class="row">
-    <section class="Subject col-md-5">
-      <h2>Choose Subject</h2>
-        <div class="radio">
-          <label><input type="radio" name="Sports">Sports</label>
-        </div>
-        <div class="radio">
-          <label><input type="radio" name="TV and Movies">TV and Movies</label>
-        </div>
-        <div class="radio">
-          <label><input type="radio" name="History">History</label>
-        </div>
-    </section>
-    <section class="Difficulty col-md-5 col-md-offset-2">
-      <h2>Choose Difficulty</h2>
-        <div class="radio">
-          <label><input type="radio" name="Easy">Easy (1 pt for each Q)</label>
-        </div>
-        <div class="radio">
-          <label><input type="radio" name="Medium">Medium (1.5 pts for each Q)</label>
-        </div>
-        <div class="radio">
-          <label><input type="radio" name="Hard">Hard (2 pts for each Q)</label>
-        </div>
-    </section>
+  <div class="start container" style="display">
+    <div class="stage row">
+      <h1 class="col-md-12">Quiz Master</h1>
+    </div>
+    <div class="row">
+      <section class="subject col-md-6">
+        <h3>Choose Subject</h3>
+        <form>
+          <div class="radio">
+            <label>
+              <input type="radio" name="optionsRadios" id="History" value="option1">
+              History
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="optionsRadios" id="Sports" value="option2">
+              Sports
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="optionsRadios" id="MTV" value="option3">
+              Movies and TV
+            </label>
+          </div>
+        </form>
+      </section>
+      <section class="difficulty col-md-5 col-md-offset-1">
+        <h3>Choose Difficulty</h3>
+        <form>
+          <div class="radio">
+            <label>
+              <input type="radio" name="optionsRadios" id="easy" value="option1">
+              Easy (1 pt per Question)
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="optionsRadios" id="medium" value="option2">
+              Medium (1.5 pts per Question)
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="optionsRadios" id="hard" value="option3">
+              Difficult (2 pts per Question)
+            </label>
+          </div>
+        </form>
+      </section>
+    </div>
+    <div class="row">
+      <input id="start-button" type="submit" value="Start Game" class="col-md-12">
+    </div>
   </div>
-  <div class="row">
-    <section class="Timer col-md-5">
-      <h4>Timer</h4>
-    </section>
-    <section class="Score col-md-5 col-md-offset-2">
-      <h4>Score</h4>
-    </section>
-  </div>
-  <footer class="Start">
-      <div class="row">
-        <input type="submit" class="col-md-12" value="Start Game">
-      </div>
-  </footer>
-</div>
 
+  <div class="game container" style="display">
+    <div class="category row">
+      <h1 class="col-md-12">Category Name</h1>
+    </div>
+    <div class="row">
+      <section class="answ-choices col-md-6">
+        <h3>Question:</h3>
+        <p>Which quarterback was NOT chosen in the 1st round of the 1983 NFL Draft?</p>
+        <h3>Choose Answer</h3>
+          <div class="list-group col-md-10">
+            <button type="button" class="list-group-item" name="choice1">Dan Marino</button>
+            <button type="button" class="list-group-item" name="choice2">Jim Kelly</button>
+            <button type="button" class="list-group-item" name="choice3">Boomer Esiason</button>
+            <button type="button" class="list-group-item" name="skip">Skip to Next Question</button>
+          </div>
+        <div class="row">
+          <div class="timer col-md-5">
+            <label>Timer</label>
+          </div>
+          <div class="score col-md-5 col-md-offset-2">
+            <label>Score</label>
+        </div>
+      </section>
+      <section class="graphic col-md-5 col-md-offset-1">
+        <h3>Related Graphic</h3>
+        <img src="images/jimkelly.jpg" class="img-responsive">
+      </section>
+    </div>
+    <div class="row">
+      <input id="answer-button" type="submit" value="Submit Answer" class="col-md-12">
+    </div>
+  </div>
+
+  <div class="tally container" style="display">
+    <div class="gameover row">
+      <h1 class="col-md-12">Game Over</h1>
+    </div>
+    <div class="row">
+      <section class="score-summary col-md-6">
+        <h3>Final Score Details</h3>
+          <div class="list-group col-md-9">
+            <li class="list-group-item list-group-item-success">Questions Attempted</li>
+            <li class="list-group-item list-group-item-info">Questions Skipped</li>
+            <li class="list-group-item list-group-item-warning">Answered Correctly</li>
+            <li class="list-group-item list-group-item-danger">% Correct of Attempted</li>
+            <li class="list-group-item list-group-item-danger">% Correct of Total Asked</li>
+            <li class="list-group-item list-group-item-danger">Total Points</li>
+          </div>
+      </section>
+      <section class="player-status col-md-5 col-md-offset-1">
+        <h3>Player Status</h3>
+          <div class="list-group col-md-10">
+            <li class="list-group-item list-group-item-success">Game Status</li>
+
+            <li class="list-group-item list-group-item-danger">Overall Status</li>
+          </div>
+      </section>
+    </div>
+    <div class="row">
+      <input id="restart-button" type="submit" value="Play Again" class="col-md-12">
+    </div>
+  </div>
 
 </body>
 </html>
