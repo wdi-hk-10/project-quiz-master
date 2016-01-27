@@ -15,7 +15,7 @@
 <body>
 
   <div id="start" class="container">
-    <div class="stage row">
+    <div id="stage" class="row">
       <h1 class="col-md-12">Quiz Master</h1>
     </div>
     <div class="row">
@@ -24,19 +24,19 @@
         <form>
           <div class="radio">
             <label>
-              <input type="radio" name="optionsRadios" value="History">
+              <input type="radio" name="subject" id="subject1" value="History">
               History
             </label>
           </div>
           <div class="radio">
             <label>
-              <input type="radio" name="optionsRadios" value="Sports">
+              <input type="radio" name="subject" id="subject2" value="Sports">
               Sports
             </label>
           </div>
           <div class="radio">
             <label>
-              <input type="radio" name="optionsRadios" value="MTV">
+              <input type="radio" name="subject" id="subject3" value="Movies and TV">
               Movies and TV
             </label>
           </div>
@@ -47,19 +47,19 @@
         <form>
           <div class="radio">
             <label>
-              <input type="radio" name="optionsRadios" value="easy">
+              <input type="radio" name="level" id="level1" name="1" value="Easy">
               Easy (1 pt per Question)
             </label>
           </div>
           <div class="radio">
             <label>
-              <input type="radio" name="optionsRadios" value="medium">
+              <input type="radio" name="level" id="level2" name="2" value="Medium">
               Medium (1.5 pts per Question)
             </label>
           </div>
           <div class="radio">
             <label>
-              <input type="radio" name="optionsRadios" value="hard">
+              <input type="radio" name="level" id="level3" name="3" value="Hard">
               Difficult (2 pts per Question)
             </label>
           </div>
@@ -72,8 +72,8 @@
   </div>
 
   <div id="game" class="container">
-    <div class="category row">
-      <h1 class="col-md-12">Category Name</h1>
+    <div id="category" class="row">
+      <h1 class="col-md-12">Category (and Level)</h1>
     </div>
     <div class="row">
       <section class="answ-choices col-md-6">
@@ -96,7 +96,7 @@
       </section>
       <section class="graphic col-md-5 col-md-offset-1">
         <h3>Related Graphic</h3>
-        <img src="images/jimkelly.jpg" class="img-responsive">
+        <img src="images/NHL.jpg" class="img-responsive">
       </section>
     </div>
     <div class="row">
@@ -105,7 +105,7 @@
   </div>
 
   <div id="tally" class="container">
-    <div class="gameover row">
+    <div id="gameover" class="row">
       <h1 class="col-md-12">Game Over</h1>
     </div>
     <div class="row">

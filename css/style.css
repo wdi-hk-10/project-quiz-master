@@ -1,6 +1,6 @@
 
 
-.stage {
+#stage {
   height: 100px;
   background-color: cyan;
   border: 2px solid blue;
@@ -39,7 +39,7 @@
   font-size: 18px;
 }
 
-.category {
+#category {
   height: 100px;
   background-color: magenta;
   border: 2px solid blue;
@@ -77,7 +77,7 @@
   font-size: 18px;
 }
 
-.gameover {
+#gameover {
   height: 100px;
   background-color: red;
   border: 2px solid blue;
