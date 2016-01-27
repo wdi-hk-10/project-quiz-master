@@ -117,3 +117,15 @@
   font-weight: bold;
   font-size: 18px;
 }
+
+#start {
+
+}
+
+#game {
+  display: none;
+}
+
+#tally {
+  display: none;
+}
