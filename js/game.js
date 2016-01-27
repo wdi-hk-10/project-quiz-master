@@ -1,16 +1,16 @@
 
-Part 2
+//Part 2
 
 var Question = function(option) {
-  this.question = option.question;
+  this.ask = option.ask;
   this.dummy1 = option.dummy1;
   this.dummy2 = option.dummy2;
-  this.answer = opton.answer;
+  this.answer = option.answer;
   this.image = option.image;
 }
 
 var question1 = new Question({
-  question: "Which quarterback was NOT chosen in the 1st round of the 1983 NFL Draft?",
+  ask: "Which quarterback was NOT chosen in the 1st round of the 1983 NFL Draft?",
   dummy1: "Dan Marino",
   dummy2: "Jim Kelly",
   answer: "Boomer Esiason",
@@ -19,7 +19,7 @@ var question1 = new Question({
 
 
 var question2 = new Question({
-  question: "When was overtime for regular season games first introduced in the National Hockey League?",
+  ask: "When was overtime for regular season games first introduced in the National Hockey League?",
   dummy1: "1999",
   dummy2: "2001",
   answer: "2005",
@@ -27,15 +27,18 @@ var question2 = new Question({
 });
 
 var question3 = new Question({
-  question: "What was the last horse before American Pharaoh to win the Triple Crown?",
+  ask: "What was the last horse before American Pharaoh to win the Triple Crown?",
   dummy1: "Seattle Slew",
   dummy2: "Intrepid",
   answer: "Affirmed",
-  image: "images/racehorse.jpg"
+  image: "images/racehorse.jpeg"
 });
+
+var questions = [question1, question2, question3];
 
 
 $(document).ready(function(){
+  var currentQ = 0;
   var subject = '';
   var level = '';
 
@@ -46,6 +49,7 @@ $(document).ready(function(){
     pickSubject();
     pickLevel();
     $('#category > h1').text(subject +' ('+level+')');
+    loadQuestion();
   });
 
   var pickSubject = function() {
@@ -74,9 +78,22 @@ $(document).ready(function(){
     }
   }
 
+  var loadQuestion= function() {
+    var question = questions[currentQ];
+    $('#question').text(question.ask);
+    $('#pick1').text(question.dummy1);
+    $('#pick2').text(question.dummy2);
+    $('#pick3').text(question.answer);
+    $('#qpic').attr('src', question.image);
+  }
+
   $('#answer-button').on('click',function(){
+    //Check answer?
 
 
+    //Go to next question
+    currentQ++;
+    loadQuestion();
   });
 
 
