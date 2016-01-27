@@ -41,6 +41,10 @@ $(document).ready(function(){
   var currentQ = 0;
   var subject = '';
   var level = '';
+  var answerChoice = "";
+  var rightAnswers = 0;
+  var questionsAsked = 0;
+  var questionsSkipped = 0;
 
   // Part 1
   $('#start-button').on('click',function(){
@@ -78,6 +82,9 @@ $(document).ready(function(){
     }
   }
 
+
+  // Part 2
+
   var loadQuestion= function() {
     var question = questions[currentQ];
     $('#question').text(question.ask);
@@ -87,22 +94,57 @@ $(document).ready(function(){
     $('#qpic').attr('src', question.image);
   }
 
-  $('#answer-button').on('click',function(){
-    //Check answer?
+  var pickAnswer = function () {
+
+  }
 
 
-    //Go to next question
-    currentQ++;
-    loadQuestion();
+  $('.answers').on('click', function(){
+    console.log($(this).text() + " has been clicked");
+    answerChoice = $(this).text();
+
   });
 
+  $('#skip').on('click', function(){
+    //skipping
+    questionsSkipped ++;
+    questionsAsked ++;
+    console.log('Questions skipped ' + questionsSkipped);
+    console.log('Total questions asked ' + questionsAsked);
+  });
 
+  $('#answer-button').on('click',function(){
+    var question = questions[currentQ];
+    if (answerChoice === question.answer) {
+      rightAnswers ++;
+      console.log('Right answers' + rightAnswers);
+    }
+    questionsAsked ++;
+    console.log('Total questions asked ' + questionsAsked);
+    console.log('Current question is ' + Number(currentQ+1));
+    currentQ++;
 
+    if (currentQ == questions.length) {
+      $('#tally').show();
+      $('#game').hide();
+    } else {
+    loadQuestion();
+    }
+  });
 
-  // Part 2
+// Part 3
 
-
-
-
+  $('#restart-button').on('click', function() {
+    subject = '';
+    level = '';
+    currentQ = 0;
+    answerChoice = "";
+    rightAnswers = 0;
+    questionsAsked = 0;
+    questionsSkipped = 0;
+    $('#start').show();
+    $('#tally').hide();
+    loadQuestion();
+  });
 
 });
