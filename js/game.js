@@ -38,7 +38,7 @@ var question4 = new Question({
   dummy1: "1951",
   dummy2: "1960",
   answer: "1961",
-  image: "images/rogermaris.jpg"
+  image: "images/rogermaris.jpeg"
 });
 
 var question5 = new Question({
@@ -46,7 +46,7 @@ var question5 = new Question({
   dummy1: "Cam Newton",
   dummy2: "Marcus Mariota",
   answer: "Jameis Winston",
-  image: "images/jameiswinston.jpg"
+  image: "images/camnewton.jpg"
 });
 
 var question6 = new Question({
@@ -54,7 +54,7 @@ var question6 = new Question({
   dummy1: "Montreal Canadiens",
   dummy2: "New York Islanders",
   answer: "Edmonton Oilers",
-  image: "images/islanders.jpg"
+  image: "images/islanders.jpeg"
 });
 
 var question7 = new Question({
@@ -62,7 +62,7 @@ var question7 = new Question({
   dummy1: "Manchester United",
   dummy2: "Real Madrid",
   answer: "Barcelona",
-  image: "images/bayern.jpg"
+  image: "images/bayern.jpeg"
 });
 
 var question8 = new Question({
@@ -98,7 +98,7 @@ $(document).ready(function(){
   var currentQ = 0;
   var subject = '';
   var level = '';
-  var answerChoice = "";
+  var answerChoice = '';
   var rightAnswers = 0;
   var questionsAsked = 0;
   var questionsTried = 0;
@@ -235,6 +235,8 @@ $(document).ready(function(){
     $('#level1').prop("checked",false);
     $('#level2').prop("checked",false);
     $('#level3').prop("checked",false);
+    subject = '';
+    level = '';
     currentQ = 0;
     answerChoice = '';
     rightAnswers = 0;

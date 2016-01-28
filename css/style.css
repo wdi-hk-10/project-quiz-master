@@ -119,13 +119,15 @@
 }
 
 #start {
-
+  margin-top: 30px;
 }
 
 #game {
   display: none;
+  margin-top: 30px;
 }
 
 #tally {
   display: none;
+  margin-top: 30px;
 }
