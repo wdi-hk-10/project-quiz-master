@@ -11,7 +11,7 @@
 
 .subject {
   background-color: lightgrey;
-  height: 400px;
+  height: 450px;
   border: 2px solid black;
   border-radius: 5px;
   padding: 10px 0px 0px 25px;
@@ -22,7 +22,7 @@
 
 .difficulty {
   background-color: lightgrey;
-  height: 400px;
+  height: 450px;
   border: 2px solid black;
   border-radius: 5px;
   padding: 10px 0px 0px 25px;
@@ -50,7 +50,7 @@
 
 .ans-choices {
   background-color: lightgrey;
-  height: 400px;
+  height: 450px;
   border: 2px solid black;
   border-radius: 5px;
   padding: 10px 0px 0px 25px;
@@ -61,7 +61,7 @@
 
 .graphic {
   background-color: lightgrey;
-  height: 400px;
+  height: 450px;
   border: 2px solid black;
   border-radius: 5px;
   padding: 20px 25px 0px 25px;
@@ -89,7 +89,7 @@
 
 .score-summary {
   background-color: lightgrey;
-  height: 400px;
+  height: 450px;
   border: 2px solid black;
   border-radius: 5px;
   padding: 10px 0px 0px 25px;
@@ -100,7 +100,7 @@
 
 .player-status {
   background-color: lightgrey;
-  height: 400px;
+  height: 450px;
   border: 2px solid black;
   border-radius: 5px;
   padding: 10px 0px 0px 25px;

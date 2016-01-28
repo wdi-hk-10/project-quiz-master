@@ -38,7 +38,7 @@ var question4 = new Question({
   dummy1: "1951",
   dummy2: "1960",
   answer: "1961",
-  image: "images/rogermaris.jpeg"
+  image: "images/rogermaris.jpg"
 });
 
 var question5 = new Question({
@@ -46,7 +46,7 @@ var question5 = new Question({
   dummy1: "Cam Newton",
   dummy2: "Marcus Mariota",
   answer: "Jameis Winston",
-  image: "images/jameiswinston.jpeg"
+  image: "images/jameiswinston.jpg"
 });
 
 var question6 = new Question({
@@ -54,15 +54,15 @@ var question6 = new Question({
   dummy1: "Montreal Canadiens",
   dummy2: "New York Islanders",
   answer: "Edmonton Oilers",
-  image: "images/islanders.jpeg"
+  image: "images/islanders.jpg"
 });
 
 var question7 = new Question({
-  ask: "Which was the last major European club to win the domestic league, cup and Champions League all in the same season??",
+  ask: "Which was the last club to win the domestic league, cup and Champions League in the same season??",
   dummy1: "Manchester United",
   dummy2: "Real Madrid",
   answer: "Barcelona",
-  image: "images/bayern.jpeg"
+  image: "images/bayern.jpg"
 });
 
 var question8 = new Question({
@@ -70,7 +70,7 @@ var question8 = new Question({
   dummy1: "Mao Asada",
   dummy2: "Midori Ito",
   answer: "Yuzuru Hanyu",
-  image: "images/midoriito.jpeg"
+  image: "images/midoriito.jpg"
 });
 
 var question9 = new Question({
@@ -78,19 +78,19 @@ var question9 = new Question({
   dummy1: "Serena Williams",
   dummy2: "Stefi Graf",
   answer: "Margaret Court",
-  image: "images/swilliams.jpeg"
+  image: "images/swilliams.jpg"
 });
 
 var question10 = new Question({
-  ask: "Who was the captain of the US Gold Medal winning Hockey team in the 1980 Winter Olympics?",
+  ask: "Who was the captain of the US Hockey team in the 1980 Winter Olympics?",
   dummy1: "Jim Craig",
   dummy2: "Ken Morrow",
   answer: "Mike Eruzione",
-  image: "images/kenmorrow.jpeg"
+  image: "images/kenmorrow.jpg"
 });
 
 var questions = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10];
-
+// var questions = [question1, question2];
 
 $(document).ready(function(){
 
@@ -101,9 +101,12 @@ $(document).ready(function(){
   var answerChoice = "";
   var rightAnswers = 0;
   var questionsAsked = 0;
+  var questionsTried = 0;
   var questionsSkipped = 0;
+  var scoreXer;
   var timer;
-  var timeLeft = 90;
+  var timeLeft = 60;
+  var choices = [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,2,1],[3,1,2]];
 
   // Part 1
 
@@ -112,18 +115,18 @@ $(document).ready(function(){
   function decreaseTime() {
     timeLeft--;
     $('#timeLeft').text(': ' + timeLeft + ' secs left');
-    if (timeLeft < 0) {
+    if (timeLeft < 1) {
       clearInterval(timer);
     }
   }
 
   $('#start-button').on('click',function(){
-    $('#game').show();
-    $('#start').hide();
     pickSubject();
     pickLevel();
     $('#category > h1').text(subject +' ('+level+')');
+    $('#start').hide();
     loadQuestion();
+    $('#game').show();
     timer = setInterval(decreaseTime, 1000);
   });
 
@@ -146,10 +149,13 @@ $(document).ready(function(){
     var level3 = $('#level3').is(":checked");
     if (level1) {
       level = $('#level1').val();
+      scoreXer = 1;
     } else if (level2) {
       level = $('#level2').val();
+      scoreXer = 1.5;
     } else {
       level = $('#level3').val();
+      scoreXer = 2;
     }
   }
 
@@ -158,10 +164,11 @@ $(document).ready(function(){
 
   var loadQuestion= function() {
     var question = questions[currentQ];
+    var choice = choices[Math.floor(Math.random() * 6)];
     $('#question').text(question.ask);
-    $('#pick1').text(question.dummy1);
-    $('#pick2').text(question.dummy2);
-    $('#pick3').text(question.answer);
+    $('#pick'+choice[0]).text(question.dummy1);
+    $('#pick'+choice[1]).text(question.dummy2);
+    $('#pick'+choice[2]).text(question.answer);
     $('#qpic').attr('src', question.image);
   }
 
@@ -170,47 +177,74 @@ $(document).ready(function(){
   $('.answers').on('click', function(){
     answerChoice = $(this).text();
     questionsAsked ++;
+    questionsTried ++;
 
   });
 
-// Take in choice of Skip
+// Skipping
   $('#skip').on('click', function(){
     questionsSkipped ++;
     questionsAsked ++;
     currentQ++;
-    loadQuestion();
-
+    if (currentQ == questions.length || timeLeft<1) {
+      $('#tally').show();
+      $('#game').hide();
+      tallyScore();
+      clearInterval(timer);
+    } else {
+      loadQuestion();
+    }
   });
 
 // Check to see if answer is right or wrong
   $('#answer-button').on('click',function(){
     var question = questions[currentQ];
-    if (answerChoice === question.answer) {
+    if (answerChoice == question.answer) {
       rightAnswers ++;
       $('#scoreTot').text(' ' +rightAnswers);
     }
     currentQ++;
-    if (currentQ == questions.length) {
+    if (currentQ == questions.length || timeLeft<1) {
       $('#tally').show();
       $('#game').hide();
+      tallyScore();
+      clearInterval(timer);
     } else {
-    loadQuestion();
+      loadQuestion();
     }
   });
 
-
 // Part 3
 
+  var tallyScore = function () {
+    $('#catLevel').text(subject+' ('+level+')');
+    $('#qstTry').text(questionsTried);
+    $('#qstSkp').text(questionsSkipped);
+    $('#ansRgt').text(rightAnswers);
+    $('#pctTry').text(((rightAnswers/questionsTried)*100).toFixed(1));
+    $('#pctTot').text(((rightAnswers/questionsAsked)*100).toFixed(1));
+    $('#totPts').text(rightAnswers*scoreXer);
+  }
+
   $('#restart-button').on('click', function() {
-    subject = '';
-    level = '';
+    $('#timeLeft').text('');
+    $('#scoreTot').text('');
+    $('#subject1').prop("checked",false);
+    $('#subject2').prop("checked",false);
+    $('#subject3').prop("checked",false);
+    $('#level1').prop("checked",false);
+    $('#level2').prop("checked",false);
+    $('#level3').prop("checked",false);
     currentQ = 0;
     answerChoice = '';
     rightAnswers = 0;
     questionsAsked = 0;
     questionsSkipped = 0;
+    questionsTried = 0;
     $('#start').show();
     $('#tally').hide();
+    timeLeft = 60;
+    $('#timeLeft').text(': ' + timeLeft + ' secs left');
     loadQuestion();
   });
 
