@@ -87,11 +87,11 @@
             <button type="button" id="skip" class="list-group-item" name="skip">Skip to Next Question</button>
           </div>
         <div class="row">
-          <div class="timer col-md-5">
-            <label>Timer</label>
+          <div class= "timer col-md-5">
+            <label>Timer<span id="timeLeft"></span></label>
           </div>
           <div class="score col-md-5 col-md-offset-2">
-            <label>Correct Answers</label>
+            <label>Correct Answers<span id="scoreTot"></span></label>
         </div>
       </section>
       <section class="graphic col-md-5 col-md-offset-1">
@@ -112,19 +112,18 @@
       <section class="score-summary col-md-6">
         <h3>Final Score Details</h3>
           <div class="list-group col-md-9">
-            <li class="list-group-item list-group-item-success">Questions Attempted: <span class="pull-right">5</span></li>
-            <li class="list-group-item list-group-item-info">Questions Skipped</li>
-            <li class="list-group-item list-group-item-warning">Answered Correctly</li>
-            <li class="list-group-item list-group-item-danger">% Correct of Attempted</li>
-            <li class="list-group-item list-group-item-danger">% Correct of Total Asked</li>
-            <li class="list-group-item list-group-item-danger">Total Points</li>
+            <li class="list-group-item list-group-item">Questions Attempted: <span id="qstTry" class="pull-right"></span></li>
+            <li class="list-group-item list-group-item">Questions Skipped: <span id="qstSkp" class="pull-right"></span></li>
+            <li class="list-group-item list-group-item">Answered Correctly :<span id="ansRgt" class="pull-right"></span></li>
+            <li class="list-group-item list-group-item">% Correct of Attempted: <span id="pctTry" class="pull-right"></span></li>
+            <li class="list-group-item list-group-item">% Correct of Total Asked: <span id="pctTot" class="pull-right"></span></li>
+            <li class="list-group-item list-group-item">Total Points: <span id="totPts" class="pull-right"></span></li>
           </div>
       </section>
       <section class="player-status col-md-5 col-md-offset-1">
         <h3>Player Status</h3>
           <div class="list-group col-md-10">
             <li class="list-group-item list-group-item-success">Game Status</li>
-
             <li class="list-group-item list-group-item-danger">Overall Status</li>
           </div>
       </section>

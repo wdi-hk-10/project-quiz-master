@@ -1,5 +1,5 @@
 
-//Part 2
+//Questions Block
 
 var Question = function(option) {
   this.ask = option.ask;
@@ -17,7 +17,6 @@ var question1 = new Question({
   image: "images/jimkelly.jpg"
 });
 
-
 var question2 = new Question({
   ask: "When was overtime for regular season games first introduced in the National Hockey League?",
   dummy1: "1999",
@@ -34,10 +33,68 @@ var question3 = new Question({
   image: "images/racehorse.jpeg"
 });
 
-var questions = [question1, question2, question3];
+var question4 = new Question({
+  ask: "In what year did Roger Maris break Babe Ruth's home run record?",
+  dummy1: "1951",
+  dummy2: "1960",
+  answer: "1961",
+  image: "images/rogermaris.jpeg"
+});
+
+var question5 = new Question({
+  ask: "Who was the last Heisman Trophy winner to be selected 1st overall?",
+  dummy1: "Cam Newton",
+  dummy2: "Marcus Mariota",
+  answer: "Jameis Winston",
+  image: "images/jameiswinston.jpeg"
+});
+
+var question6 = new Question({
+  ask: "Which hockey dynasty has never managed to win 4 straight Stanley Cups?",
+  dummy1: "Montreal Canadiens",
+  dummy2: "New York Islanders",
+  answer: "Edmonton Oilers",
+  image: "images/islanders.jpeg"
+});
+
+var question7 = new Question({
+  ask: "Which was the last major European club to win the domestic league, cup and Champions League all in the same season??",
+  dummy1: "Manchester United",
+  dummy2: "Real Madrid",
+  answer: "Barcelona",
+  image: "images/bayern.jpeg"
+});
+
+var question8 = new Question({
+  ask: "Who was the last Japanese figure skater to win an Olympic medal?",
+  dummy1: "Mao Asada",
+  dummy2: "Midori Ito",
+  answer: "Yuzuru Hanyu",
+  image: "images/midoriito.jpeg"
+});
+
+var question9 = new Question({
+  ask: "Who holds the record for most number of Women's Grand Slam Singles titles?",
+  dummy1: "Serena Williams",
+  dummy2: "Stefi Graf",
+  answer: "Margaret Court",
+  image: "images/swilliams.jpeg"
+});
+
+var question10 = new Question({
+  ask: "Who was the captain of the US Gold Medal winning Hockey team in the 1980 Winter Olympics?",
+  dummy1: "Jim Craig",
+  dummy2: "Ken Morrow",
+  answer: "Mike Eruzione",
+  image: "images/kenmorrow.jpeg"
+});
+
+var questions = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10];
 
 
 $(document).ready(function(){
+
+  // Global Variables
   var currentQ = 0;
   var subject = '';
   var level = '';
@@ -45,8 +102,21 @@ $(document).ready(function(){
   var rightAnswers = 0;
   var questionsAsked = 0;
   var questionsSkipped = 0;
+  var timer;
+  var timeLeft = 90;
 
   // Part 1
+
+// Keep track of Time Limit
+
+  function decreaseTime() {
+    timeLeft--;
+    $('#timeLeft').text(': ' + timeLeft + ' secs left');
+    if (timeLeft < 0) {
+      clearInterval(timer);
+    }
+  }
+
   $('#start-button').on('click',function(){
     $('#game').show();
     $('#start').hide();
@@ -54,6 +124,7 @@ $(document).ready(function(){
     pickLevel();
     $('#category > h1').text(subject +' ('+level+')');
     loadQuestion();
+    timer = setInterval(decreaseTime, 1000);
   });
 
   var pickSubject = function() {
@@ -94,36 +165,31 @@ $(document).ready(function(){
     $('#qpic').attr('src', question.image);
   }
 
-  var pickAnswer = function () {
 
-  }
-
-
+// Take in answer choice
   $('.answers').on('click', function(){
-    console.log($(this).text() + " has been clicked");
     answerChoice = $(this).text();
+    questionsAsked ++;
 
   });
 
+// Take in choice of Skip
   $('#skip').on('click', function(){
-    //skipping
     questionsSkipped ++;
     questionsAsked ++;
-    console.log('Questions skipped ' + questionsSkipped);
-    console.log('Total questions asked ' + questionsAsked);
+    currentQ++;
+    loadQuestion();
+
   });
 
+// Check to see if answer is right or wrong
   $('#answer-button').on('click',function(){
     var question = questions[currentQ];
     if (answerChoice === question.answer) {
       rightAnswers ++;
-      console.log('Right answers' + rightAnswers);
+      $('#scoreTot').text(' ' +rightAnswers);
     }
-    questionsAsked ++;
-    console.log('Total questions asked ' + questionsAsked);
-    console.log('Current question is ' + Number(currentQ+1));
     currentQ++;
-
     if (currentQ == questions.length) {
       $('#tally').show();
       $('#game').hide();
@@ -132,13 +198,14 @@ $(document).ready(function(){
     }
   });
 
+
 // Part 3
 
   $('#restart-button').on('click', function() {
     subject = '';
     level = '';
     currentQ = 0;
-    answerChoice = "";
+    answerChoice = '';
     rightAnswers = 0;
     questionsAsked = 0;
     questionsSkipped = 0;
