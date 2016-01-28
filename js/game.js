@@ -107,6 +107,7 @@ $(document).ready(function(){
   var timer;
   var timeLeft = 60;
   var choices = [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,2,1],[3,1,2]];
+  var answerSelected = false;
 
   // Part 1
 
@@ -120,15 +121,22 @@ $(document).ready(function(){
     }
   }
 
-  $('#start-button').on('click',function(){
-    pickSubject();
-    pickLevel();
+  $('#start-button').on('click',function() {
     $('#category > h1').text(subject +' ('+level+')');
     $('#start').hide();
     loadQuestion();
     $('#game').show();
     timer = setInterval(decreaseTime, 1000);
   });
+
+  $('.radio input').on('change', function(){
+    pickSubject();
+    pickLevel();
+    console.log(subject, level)
+    if (subject && level) {
+      $('#start-button').removeAttr("disabled");
+    }
+  })
 
   var pickSubject = function() {
     var subject1 = $('#subject1').is(":checked");
@@ -138,7 +146,7 @@ $(document).ready(function(){
       subject = $('#subject1').val();
     } else if (subject2) {
       subject = $('#subject2').val();
-    } else {
+    } else if (subject3) {
       subject = $('#subject3').val();
     }
   }
@@ -153,15 +161,13 @@ $(document).ready(function(){
     } else if (level2) {
       level = $('#level2').val();
       scoreXer = 1.5;
-    } else {
+    } else if (level3) {
       level = $('#level3').val();
       scoreXer = 2;
     }
   }
 
-
   // Part 2
-
   var loadQuestion= function() {
     var question = questions[currentQ];
     var choice = choices[Math.floor(Math.random() * 6)];
@@ -176,9 +182,12 @@ $(document).ready(function(){
 // Take in answer choice
   $('.answers').on('click', function(){
     answerChoice = $(this).text();
-    questionsAsked ++;
-    questionsTried ++;
-
+    if (!answerSelected){
+      questionsAsked ++;
+      questionsTried ++;
+      answerSelected = true;
+      $('#answer-button').removeAttr("disabled");
+    }
   });
 
 // Skipping
@@ -194,6 +203,8 @@ $(document).ready(function(){
     } else {
       loadQuestion();
     }
+    answerSelected = false;
+    $('#answer-button').attr("disabled", true);
   });
 
 // Check to see if answer is right or wrong
@@ -212,6 +223,8 @@ $(document).ready(function(){
     } else {
       loadQuestion();
     }
+    answerSelected = false;
+    $('#answer-button').attr("disabled", true);
   });
 
 // Part 3
@@ -248,6 +261,7 @@ $(document).ready(function(){
     timeLeft = 60;
     $('#timeLeft').text(': ' + timeLeft + ' secs left');
     loadQuestion();
+    $('#start-button').attr("disabled", true)
   });
 
 });
