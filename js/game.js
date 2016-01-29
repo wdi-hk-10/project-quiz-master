@@ -134,7 +134,6 @@ $(document).ready(function(){
   $('.radio input').on('change', function(){
     pickSubject();
     pickLevel();
-    console.log(subject, level)
     if (subject && level) {
       $('#start-button').removeAttr("disabled");
     }
@@ -180,6 +179,7 @@ $(document).ready(function(){
     $('#qpic').attr('src', question.image);
   }
 
+console.log
 
 // Take in answer choice
   $('.answers').on('click', function(){
@@ -222,7 +222,6 @@ $(document).ready(function(){
       $('#tally').show();
       $('#game').hide();
       chkStat();
-      console.log(playerStat);
       tallyScore();
       clearInterval(timer);
     } else {
@@ -236,7 +235,6 @@ $(document).ready(function(){
 
   var chkStat = function () {
     var pctTot = (rightAnswers/questionsAsked);
-    console.log(pctTot);
     if (pctTot < 0.2) {
         playerStat = "Dohh!";
         $('#statPic').attr("src","images/dohh.gif");
@@ -253,7 +251,6 @@ $(document).ready(function(){
         playerStat = "Rock Star";
         $('#statPic').attr("src","images/rockstar.gif")
     }
-    console.log(playerStat);
   }
 
   var tallyScore = function () {
@@ -269,7 +266,7 @@ $(document).ready(function(){
     $('#chkStat').text(playerStat);
   }
 
-
+// All global variables must be reset and the html cleared before next round starts
 
   $('#restart-button').on('click', function() {
     $('#timeLeft').text('');
