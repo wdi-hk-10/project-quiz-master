@@ -179,8 +179,6 @@ $(document).ready(function(){
     $('#qpic').attr('src', question.image);
   }
 
-console.log
-
 // Take in answer choice
   $('.answers').on('click', function(){
     answerChoice = $(this).text();
