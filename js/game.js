@@ -89,8 +89,9 @@ var question10 = new Question({
   image: "images/kenmorrow.jpg"
 });
 
-var questions = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10];
-// var questions = [question1, question2];
+// var questions = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10];
+
+var questions = [question1, question2, question3, question4, question5];
 
 $(document).ready(function(){
 
@@ -108,6 +109,7 @@ $(document).ready(function(){
   var timeLeft = 60;
   var choices = [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,2,1],[3,1,2]];
   var answerSelected = false;
+  var playerStat = ""
 
   // Part 1
 
@@ -198,6 +200,7 @@ $(document).ready(function(){
     if (currentQ == questions.length || timeLeft<1) {
       $('#tally').show();
       $('#game').hide();
+      chkStat();
       tallyScore();
       clearInterval(timer);
     } else {
@@ -218,6 +221,8 @@ $(document).ready(function(){
     if (currentQ == questions.length || timeLeft<1) {
       $('#tally').show();
       $('#game').hide();
+      chkStat();
+      console.log(playerStat);
       tallyScore();
       clearInterval(timer);
     } else {
@@ -229,15 +234,42 @@ $(document).ready(function(){
 
 // Part 3
 
+  var chkStat = function () {
+    var pctTot = (rightAnswers/questionsAsked);
+    console.log(pctTot);
+    if (pctTot < 0.2) {
+        playerStat = "Dohh!";
+        $('#statPic').attr("src","images/dohh.gif");
+    } else if (pctTot >= 0.2 && pctTot < 0.5) {
+        playerStat = "Slacker";
+        $('#statPic').attr("src","images/slacker.gif");
+    } else if (pctTot  >= 0.5 && pctTot < 0.7) {
+        playerStat = "Average Joe";
+        $('#statPic').attr("src","images/averagejoe.gif");
+    } else if (pctTot >= 0.7 && pctTot < 0.9) {
+        playerStat = "Egg Head";
+        $('#statPic').attr("src","images/egghead.gif");
+    } else if (pctTot >= 0.9) {
+        playerStat = "Rock Star";
+        $('#statPic').attr("src","images/rockstar.gif")
+    }
+    console.log(playerStat);
+  }
+
   var tallyScore = function () {
     $('#catLevel').text(subject+' ('+level+')');
     $('#qstTry').text(questionsTried);
     $('#qstSkp').text(questionsSkipped);
     $('#ansRgt').text(rightAnswers);
     $('#pctTry').text(((rightAnswers/questionsTried)*100).toFixed(1));
-    $('#pctTot').text(((rightAnswers/questionsAsked)*100).toFixed(1));
+    $('.pctTot').each(function(index, elem) {
+      $(elem).text(((rightAnswers/questionsAsked)*100).toFixed(1));
+    });
     $('#totPts').text(rightAnswers*scoreXer);
+    $('#chkStat').text(playerStat);
   }
+
+
 
   $('#restart-button').on('click', function() {
     $('#timeLeft').text('');
@@ -261,6 +293,7 @@ $(document).ready(function(){
     timeLeft = 60;
     $('#timeLeft').text(': ' + timeLeft + ' secs left');
     loadQuestion();
+    playerStat = "";
     $('#start-button').attr("disabled", true)
   });
 
