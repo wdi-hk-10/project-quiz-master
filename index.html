@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+
+  <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
+  <script>"https://cdnjs.cloudflare.com/ajax/libs/buzz/1.1.10/buzz.min.js"</script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="js/game.js"></script>
+
+</head>
+<body>
+
+  <div id="start" class="container">
+    <div id="stage" class="row">
+      <h1 class="col-md-12">Quiz Master</h1>
+    </div>
+    <div class="row">
+      <section class="subject col-md-6">
+        <h3>Choose Subject</h3>
+        <form>
+          <div class="radio">
+            <label>
+              <input type="radio" name="subject" id="subject1" value="History">
+              History
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="subject" id="subject2" value="Sports">
+              Sports
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="subject" id="subject3" value="Movies and TV">
+              Movies and TV
+            </label>
+          </div>
+        </form>
+      </section>
+      <section class="difficulty col-md-5 col-md-offset-1">
+        <h3>Choose Difficulty</h3>
+        <form>
+          <div class="radio">
+            <label>
+              <input type="radio" name="level" id="level1" name="1" value="Easy">
+              Easy (1 pt per Question)
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="level" id="level2" name="2" value="Medium">
+              Medium (1.5 pts per Question)
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="level" id="level3" name="3" value="Hard">
+              Difficult (2 pts per Question)
+            </label>
+          </div>
+        </form>
+      </section>
+    </div>
+    <div class="row">
+      <input id="start-button" type="submit" value="Start Game" class="col-md-12" disabled>
+    </div>
+  </div>
+
+  <div id="game" class="container">
+    <div id="category" class="row">
+      <h1 class="col-md-12">Category (and Level)</h1>
+    </div>
+    <div class="row">
+      <section class="ans-choices col-md-6">
+        <h3>Question</h3>
+        <p id="question"></p>
+        <h3>Choose Answer</h3>
+          <div class="list-group col-md-10">
+            <button type="button" id="pick1" class="list-group-item answers" name="choice1"></button>
+            <button type="button" id="pick2" class="list-group-item answers" name="choice2"></button>
+            <button type="button" id="pick3" class="list-group-item answers" name="choice3"></button>
+            <button type="button" id="skip" class="list-group-item" name="skip">Skip to Next Question</button>
+          </div>
+        <div class="row">
+          <div class= "timer col-md-5">
+            <label>Timer<span id="timeLeft"></span></label>
+          </div>
+          <div class="score col-md-5 col-md-offset-2">
+            <label>Correct Answers<span id="scoreTot"></span></label>
+        </div>
+      </section>
+      <section class="graphic col-md-5 col-md-offset-1">
+        <h3>Related Graphic</h3>
+        <img id="qpic" src="" class="img-responsive">
+      </section>
+    </div>
+    <div class="row">
+      <input id="answer-button" type="submit" value="Submit Answer" class="col-md-12" disabled>
+    </div>
+  </div>
+
+  <div id="tally" class="container">
+    <div id="gameover" class="row">
+      <h1 class="col-md-12">Game Over</h1>
+    </div>
+    <div class="row">
+      <section class="score-summary col-md-6">
+        <h3>Final Score Details</h3>
+          <div class="list-group col-md-10">
+            <li class="list-group-item list-group-item">Category and Level: <span id="catLevel" class="pull-right"></span></li>
+            <li class="list-group-item list-group-item">Questions Skipped: <span id="qstSkp" class="pull-right"></span></li>
+            <li class="list-group-item list-group-item">Questions Attempted: <span id="qstTry" class="pull-right"></span></li>
+            <li class="list-group-item list-group-item">Answered Correctly :<span id="ansRgt" class="pull-right"></span></li>
+            <li class="list-group-item list-group-item">% Correct of Attempted: <span id="pctTry" class="pull-right"></span></li>
+            <li class="list-group-item list-group-item">% Correct of Total Asked: <span class="pctTot pull-right"></span></li>
+            <li class="list-group-item list-group-item">Total Points: <span id="totPts" class="pull-right"></span></li>
+          </div>
+      </section>
+      <section class="player-status col-md-5 col-md-offset-1">
+        <h3>Player Status</h3>
+          <div class="list-group col-md-12">
+            <li class="list-group-item list-group-item-success">Based on your % Correct of Total:<span class="pctTot pull-right"></span></li>
+            <li class="list-group-item list-group-item-danger">You have earned the status of<span id="chkStat" class="pull-right"></span></li>
+            <img id="statPic" src="" class="img-responsive">
+          </div>
+      </section>
+    </div>
+    <div class="row">
+      <input id="restart-button" type="submit" value="Play Again" class="col-md-12">
+    </div>
+  </div>
+
+</body>
+</html>
